@@ -21,7 +21,6 @@ enum layers {
     _LOWER,
     _RAISE,
     _ADJUST,
-	_META
 };
 
 enum combo_events {
@@ -61,9 +60,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_QWERTY] = LAYOUT(
       KC_TAB,       KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_PIPE,
-      MT(MOD_LCTL, KC_BSPC),   KC_A,   KC_S,   KC_D,   LT(_META, KC_F),   KC_G,                                         KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-      KC_LSFT,                 KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_LSFT,   KC_ESC, KC_LSFT, KC_LSFT, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_UNDS,
-              KC_LALT, KC_DEL, KC_LGUI, LT(_LOWER, KC_SPC), KC_ESC, KC_ENT, LT(_RAISE, KC_SPC), KC_LALT,  KC_LALT, _______
+      MT(MOD_LCTL, KC_BSPC),   KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                                         KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+      MT(MOD_LSFT, KC_ESC),   KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_ESC,   KC_ESC, KC_LSFT, KC_LSFT, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_UNDS,
+              KC_ESC, KC_DEL, KC_LGUI, LT(_LOWER, KC_SPC), KC_ESC, KC_ENT, LT(_RAISE, KC_SPC), KC_LALT,  KC_LALT, _______
     ),
 /*
  * Lower Layer: Symbols
@@ -127,12 +126,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
 
-	 [_META] = LAYOUT(
-	   _______, C(KC_W), _______, _______, _______, _______,									 _______, _______, _______, _______, _______, _______,
-	   _______, _______, _______, C(KC_B), _______, _______,									 _______, _______, _______, _______, _______, _______,
-	   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-								  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
-	 ),
 // /*
 //  * Layer template
 //  *
@@ -228,22 +221,4 @@ void oled_task_user(void) {
 #endif
 
 #ifdef ENCODER_ENABLE
-void encoder_update_user(uint8_t index, bool clockwise) {
-    if (index == 1) {
-        // Volume control
-        if (clockwise) {
-            tap_code(KC_VOLU);
-        } else {
-            tap_code(KC_VOLD);
-        }
-    }
-    else if (index == 0) {
-        // Page up/Page down
-        if (clockwise) {
-            tap_code(KC_PGDN);
-        } else {
-            tap_code(KC_PGUP);
-        }
-    }
-}
 #endif
